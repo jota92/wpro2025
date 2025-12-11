@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>授業課題・テスト詳細</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <h1>授業課題・テスト管理アプリ</h1>
+</header>
+<main>
+  <h2>詳細 (ID: <%= task.id %>)</h2>
+  <table>
+    <tbody>
+      <tr><th>ID</th><td><%= task.id %></td></tr>
+      <tr><th>タイトル</th><td><%= task.title %></td></tr>
+      <tr><th>科目</th><td><%= task.course %></td></tr>
+      <tr><th>種別</th><td><%= task.type %></td></tr>
+      <tr><th>締切日</th><td><%= task.dueDate %></td></tr>
+      <tr><th>状態</th><td><%= task.status %></td></tr>
+      <tr><th>メモ</th><td><pre><%= task.memo %></pre></td></tr>
+    </tbody>
+  </table>
+
+  <p>
+    <a href="/edit/<%= task.id %>">編集</a>
+  </p>
+  <form action="/delete/<%= task.id %>" method="post" onsubmit="return confirm('本当に削除しますか？');">
+    <button type="submit">削除</button>
+  </form>
+  <p><a href="/">一覧に戻る</a></p>
+</main>
+<footer>
+  <p>Webプログラミング レポート用アプリ</p>
+</footer>
+</body>
+</html>

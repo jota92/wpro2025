@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>授業課題・テスト一覧</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <h1>授業課題・テスト管理アプリ</h1>
+</header>
+<main>
+  <h2>一覧</h2>
+  <p><a href="/create">新しい課題・テストを登録</a></p>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>タイトル</th>
+        <th>科目</th>
+        <th>種別</th>
+        <th>締切日</th>
+        <th>状態</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if (tasks.length === 0) { %>
+      <tr><td colspan="7">登録されている課題・テストはありません。</td></tr>
+    <% } else { %>
+      <% tasks.forEach(function(task) { %>
+        <tr>
+          <td><%= task.id %></td>
+          <td><%= task.title %></td>
+          <td><%= task.course %></td>
+          <td><%= task.type %></td>
+          <td><%= task.dueDate %></td>
+          <td><%= task.status %></td>
+          <td><a href="/tasks/<%= task.id %>">表示</a></td>
+        </tr>
+      <% }); %>
+    <% } %>
+    </tbody>
+  </table>
+</main>
+<footer>
+  <p>Webプログラミング レポート用アプリ</p>
+</footer>
+</body>
+</html>

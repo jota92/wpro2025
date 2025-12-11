@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo一覧</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <h1>ToDo管理アプリ</h1>
+</header>
+<main>
+  <h2>ToDo一覧</h2>
+  <p><a href="/create">新しいToDoを追加</a></p>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>タイトル</th>
+        <th>優先度</th>
+        <th>完了</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if (todos.length === 0) { %>
+      <tr><td colspan="5">登録されているToDoはありません。</td></tr>
+    <% } else { %>
+      <% todos.forEach(function(todo) { %>
+        <tr>
+          <td><%= todo.id %></td>
+          <td><%= todo.title %></td>
+          <td><%= todo.priority %></td>
+          <td><%= todo.done ? '済' : '未' %></td>
+          <td><a href="/todos/<%= todo.id %>">表示</a></td>
+        </tr>
+      <% }); %>
+    <% } %>
+    </tbody>
+  </table>
+</main>
+<footer>
+  <p>Webプログラミング レポート用アプリ</p>
+</footer>
+</body>
+</html>

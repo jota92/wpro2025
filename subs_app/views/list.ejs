@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>サブスク一覧</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <h1>サブスク管理アプリ</h1>
+</header>
+<main>
+  <h2>登録済みサブスク一覧</h2>
+  <p><a href="/create">新しいサブスクを登録</a></p>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>サービス名</th>
+        <th>カテゴリ</th>
+        <th>料金</th>
+        <th>課金サイクル</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if (subs.length === 0) { %>
+      <tr><td colspan="6">登録されているサブスクはありません。</td></tr>
+    <% } else { %>
+      <% subs.forEach(function(sub) { %>
+        <tr>
+          <td><%= sub.id %></td>
+          <td><%= sub.name %></td>
+          <td><%= sub.category %></td>
+          <td><%= sub.fee %> 円</td>
+          <td><%= sub.cycle %></td>
+          <td><a href="/subs/<%= sub.id %>">表示</a></td>
+        </tr>
+      <% }); %>
+    <% } %>
+    </tbody>
+  </table>
+</main>
+<footer>
+  <p>Webプログラミング レポート用アプリ</p>
+</footer>
+</body>
+</html>

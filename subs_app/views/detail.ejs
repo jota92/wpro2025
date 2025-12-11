@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>サブスク詳細</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <h1>サブスク管理アプリ</h1>
+</header>
+<main>
+  <h2>詳細 (ID: <%= sub.id %>)</h2>
+  <table>
+    <tbody>
+      <tr><th>ID</th><td><%= sub.id %></td></tr>
+      <tr><th>サービス名</th><td><%= sub.name %></td></tr>
+      <tr><th>カテゴリ</th><td><%= sub.category %></td></tr>
+      <tr><th>料金</th><td><%= sub.fee %> 円</td></tr>
+      <tr><th>課金サイクル</th><td><%= sub.cycle %></td></tr>
+      <tr><th>メモ</th><td><pre><%= sub.memo %></pre></td></tr>
+    </tbody>
+  </table>
+
+  <p>
+    <a href="/edit/<%= sub.id %>">編集</a>
+  </p>
+  <form action="/delete/<%= sub.id %>" method="post" onsubmit="return confirm('本当に削除しますか？');">
+    <button type="submit">削除</button>
+  </form>
+  <p><a href="/">一覧に戻る</a></p>
+</main>
+<footer>
+  <p>Webプログラミング レポート用アプリ</p>
+</footer>
+</body>
+</html>

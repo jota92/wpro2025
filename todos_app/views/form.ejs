@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo登録フォーム</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <h1>ToDo管理アプリ</h1>
+</header>
+<main>
+  <% if (todo) { %>
+    <h2>編集 (ID: <%= todo.id %>)</h2>
+  <% } else { %>
+    <h2>新規登録</h2>
+  <% } %>
+
+  <form action="<%= action %>" method="post">
+    <label>
+      タイトル
+      <input type="text" name="title" value="<%= todo ? todo.title : '' %>" required>
+    </label>
+
+    <label>
+      優先度
+      <select name="priority">
+        <% const p = todo ? todo.priority : '中'; %>
+        <option value="高" <%= p === '高' ? 'selected' : '' %>>高</option>
+        <option value="中" <%= p === '中' ? 'selected' : '' %>>中</option>
+        <option value="低" <%= p === '低' ? 'selected' : '' %>>低</option>
+      </select>
+    </label>
+
+    <label>
+      完了
+      <input type="checkbox" name="done" <%= todo && todo.done ? 'checked' : '' %>>
+    </label>
+
+    <label>
+      メモ
+      <textarea name="memo" rows="4"><%= todo ? todo.memo : '' %></textarea>
+    </label>
+
+    <button type="submit">送信</button>
+  </form>
+
+  <p><a href="/">一覧に戻る</a></p>
+</main>
+<footer>
+  <p>Webプログラミング レポート用アプリ</p>
+</footer>
+</body>
+</html>

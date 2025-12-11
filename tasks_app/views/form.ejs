@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>授業課題・テスト登録フォーム</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <h1>授業課題・テスト管理アプリ</h1>
+</header>
+<main>
+  <% if (task) { %>
+    <h2>編集 (ID: <%= task.id %>)</h2>
+  <% } else { %>
+    <h2>新規登録</h2>
+  <% } %>
+
+  <form action="<%= action %>" method="post">
+    <label>
+      タイトル
+      <input type="text" name="title" value="<%= task ? task.title : '' %>" required>
+    </label>
+
+    <label>
+      科目
+      <input type="text" name="course" value="<%= task ? task.course : '' %>" required>
+    </label>
+
+    <label>
+      種別
+      <input type="text" name="type" value="<%= task ? task.type : '' %>" placeholder="レポート / テスト など" required>
+    </label>
+
+    <label>
+      締切日
+      <input type="date" name="dueDate" value="<%= task ? task.dueDate : '' %>" required>
+    </label>
+
+    <label>
+      状態
+      <select name="status" required>
+        <% const s = task ? task.status : '未提出'; %>
+        <option value="未提出" <%= s === '未提出' ? 'selected' : '' %>>未提出</option>
+        <option value="勉強中" <%= s === '勉強中' ? 'selected' : '' %>>勉強中</option>
+        <option value="提出済" <%= s === '提出済' ? 'selected' : '' %>>提出済</option>
+      </select>
+    </label>
+
+    <label>
+      メモ
+      <textarea name="memo" rows="4"><%= task ? task.memo : '' %></textarea>
+    </label>
+
+    <button type="submit">送信</button>
+  </form>
+
+  <p><a href="/">一覧に戻る</a></p>
+</main>
+<footer>
+  <p>Webプログラミング レポート用アプリ</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>サブスク登録フォーム</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <h1>サブスク管理アプリ</h1>
+</header>
+<main>
+  <% if (sub) { %>
+    <h2>編集 (ID: <%= sub.id %>)</h2>
+  <% } else { %>
+    <h2>新規登録</h2>
+  <% } %>
+
+  <form action="<%= action %>" method="post">
+    <label>
+      サービス名
+      <input type="text" name="name" value="<%= sub ? sub.name : '' %>" required>
+    </label>
+
+    <label>
+      カテゴリ
+      <input type="text" name="category" value="<%= sub ? sub.category : '' %>" placeholder="動画配信 / 音楽 / クラウドストレージ など" required>
+    </label>
+
+    <label>
+      月額料金（円）
+      <input type="number" name="fee" value="<%= sub ? sub.fee : '' %>" min="0" step="1" required>
+    </label>
+
+    <label>
+      課金サイクル
+      <input type="text" name="cycle" value="<%= sub ? sub.cycle : '毎月' %>" required>
+    </label>
+
+    <label>
+      メモ
+      <textarea name="memo" rows="4"><%= sub ? sub.memo : '' %></textarea>
+    </label>
+
+    <button type="submit">送信</button>
+  </form>
+
+  <p><a href="/">一覧に戻る</a></p>
+</main>
+<footer>
+  <p>Webプログラミング レポート用アプリ</p>
+</footer>
+</body>
+</html>

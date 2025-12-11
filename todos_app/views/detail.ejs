@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo詳細</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <h1>ToDo管理アプリ</h1>
+</header>
+<main>
+  <h2>詳細 (ID: <%= todo.id %>)</h2>
+  <table>
+    <tbody>
+      <tr><th>ID</th><td><%= todo.id %></td></tr>
+      <tr><th>タイトル</th><td><%= todo.title %></td></tr>
+      <tr><th>優先度</th><td><%= todo.priority %></td></tr>
+      <tr><th>完了</th><td><%= todo.done ? '済' : '未' %></td></tr>
+      <tr><th>メモ</th><td><pre><%= todo.memo %></pre></td></tr>
+    </tbody>
+  </table>
+
+  <p>
+    <a href="/edit/<%= todo.id %>">編集</a>
+  </p>
+  <form action="/delete/<%= todo.id %>" method="post" onsubmit="return confirm('本当に削除しますか？');">
+    <button type="submit">削除</button>
+  </form>
+  <p><a href="/">一覧に戻る</a></p>
+</main>
+<footer>
+  <p>Webプログラミング レポート用アプリ</p>
+</footer>
+</body>
+</html>
