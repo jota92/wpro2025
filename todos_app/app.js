@@ -1,14 +1,12 @@
 "use strict";
 
 const express = require('express');
-const path = require('path');
 const app = express();
 
 app.set('view engine', 'ejs');
-app.use("/public", express.static(path.join(__dirname + "/public")));
+app.use("/public", express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
-// ToDoのデータ
 let todos = [
   {
     id: 1,
@@ -30,12 +28,10 @@ function findTodoById(id) {
   return todos.find(t => t.id === id);
 }
 
-// 一覧表示
 app.get("/", (req, res) => {
   res.render("list", { todos: todos });
 });
 
-// 詳細表示
 app.get("/todos/:id", (req, res) => {
   const id = Number(req.params.id);
   const todo = findTodoById(id);
@@ -46,7 +42,6 @@ app.get("/todos/:id", (req, res) => {
   res.render("detail", { todo: todo });
 });
 
-// 新規作成フォーム
 app.get("/create", (req, res) => {
   res.render("form", {
     todo: null,
@@ -54,7 +49,6 @@ app.get("/create", (req, res) => {
   });
 });
 
-// 新規作成処理
 app.post("/create", (req, res) => {
   const nextId = todos.length > 0 ? todos[todos.length - 1].id + 1 : 1;
   const todo = {
@@ -68,7 +62,6 @@ app.post("/create", (req, res) => {
   res.redirect("/");
 });
 
-// 編集フォーム
 app.get("/edit/:id", (req, res) => {
   const id = Number(req.params.id);
   const todo = findTodoById(id);
@@ -82,7 +75,6 @@ app.get("/edit/:id", (req, res) => {
   });
 });
 
-// 編集処理
 app.post("/edit/:id", (req, res) => {
   const id = Number(req.params.id);
   const todo = findTodoById(id);
@@ -97,19 +89,16 @@ app.post("/edit/:id", (req, res) => {
   res.redirect("/todos/" + id);
 });
 
-// 削除処理
 app.post("/delete/:id", (req, res) => {
   const id = Number(req.params.id);
   todos = todos.filter(t => t.id !== id);
   res.redirect("/");
 });
 
-// 404
 app.use((req, res, next) => {
   res.status(404).send("ページが見つかりません");
 });
 
-// ポート8080で待ち受け
 app.listen(8080, () => {
   console.log("todos_app: 8080番ポートで待ち受け中");
 });

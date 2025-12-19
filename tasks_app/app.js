@@ -1,14 +1,12 @@
 "use strict";
 
 const express = require('express');
-const path = require('path');
 const app = express();
 
 app.set('view engine', 'ejs');
-app.use("/public", express.static(path.join(__dirname + "/public")));
+app.use("/public", express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
-// 授業課題・テストのデータ（配列＋ハッシュ形式）
 let tasks = [
   {
     id: 1,
@@ -34,12 +32,10 @@ function findTaskById(id) {
   return tasks.find(t => t.id === id);
 }
 
-// 一覧表示
 app.get("/", (req, res) => {
   res.render("list", { tasks: tasks });
 });
 
-// 詳細表示
 app.get("/tasks/:id", (req, res) => {
   const id = Number(req.params.id);
   const task = findTaskById(id);
@@ -50,7 +46,6 @@ app.get("/tasks/:id", (req, res) => {
   res.render("detail", { task: task });
 });
 
-// 新規作成フォーム
 app.get("/create", (req, res) => {
   res.render("form", {
     task: null,
@@ -58,7 +53,6 @@ app.get("/create", (req, res) => {
   });
 });
 
-// 新規作成処理
 app.post("/create", (req, res) => {
   const nextId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
   const task = {
@@ -74,7 +68,6 @@ app.post("/create", (req, res) => {
   res.redirect("/");
 });
 
-// 編集フォーム
 app.get("/edit/:id", (req, res) => {
   const id = Number(req.params.id);
   const task = findTaskById(id);
@@ -88,7 +81,6 @@ app.get("/edit/:id", (req, res) => {
   });
 });
 
-// 編集処理
 app.post("/edit/:id", (req, res) => {
   const id = Number(req.params.id);
   const task = findTaskById(id);
@@ -105,19 +97,16 @@ app.post("/edit/:id", (req, res) => {
   res.redirect("/tasks/" + id);
 });
 
-// 削除処理
 app.post("/delete/:id", (req, res) => {
   const id = Number(req.params.id);
   tasks = tasks.filter(t => t.id !== id);
   res.redirect("/");
 });
 
-// 404
 app.use((req, res, next) => {
   res.status(404).send("ページが見つかりません");
 });
 
-// ポート8080で待ち受け
 app.listen(8080, () => {
   console.log("tasks_app: 8080番ポートで待ち受け中");
 });
