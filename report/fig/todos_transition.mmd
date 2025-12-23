@@ -1,0 +1,16 @@
+stateDiagram-v2
+[*] --> entry:一覧画面
+entry : /
+
+entry --> todoCreate:新規登録フォーム
+entry --> todoDetail:詳細表示
+
+todoCreate : /create
+todoDetail : /todos/id
+todoEdit   : /edit/id
+
+entry      --> todoDetail:詳細リンク
+todoDetail --> entry:一覧へ戻る
+todoDetail --> todoEdit:編集フォーム
+todoEdit   --> todoDetail:更新後の詳細
+todoEdit   --> entry:一覧へ戻る

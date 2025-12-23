@@ -1,0 +1,408 @@
+\documentclass[uplatex,a4paper,11pt]{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{here}
+\usepackage{url}
+
+\title{基本的なデータ表示の Web アプリ開発 仕様書}
+\author{25G1016 入江晟太}
+\date{2025年12月24日}
+
+\begin{document}
+\maketitle
+
+\section*{GitHub リポジトリ URL}
+
+本仕様書で説明する 3 つの Web アプリケーションのソースコード一式は，
+次の GitHub リポジトリで管理している．
+
+\begin{quote}
+\url{https://github.com/jota92/wpro2025}
+\end{quote}
+
+リポジトリ直下には，以下の 3 つのディレクトリを用意し，それぞれ独立した Web アプリケーションとして実装した．
+
+\begin{itemize}
+  \item \texttt{tasks\_app}：授業課題・テスト管理アプリ
+  \item \texttt{subs\_app}：サブスク管理アプリ
+  \item \texttt{todos\_app}：ToDo リストアプリ
+\end{itemize}
+
+\section{利用者向け仕様}
+
+この節では，実際に Web アプリケーションを利用するユーザの視点から，
+3 つのアプリケーションの目的，画面構成，主な操作を説明する．
+
+\subsection{授業課題・テスト管理アプリ（tasks\_app）}
+
+\subsubsection*{目的}
+
+大学の授業ごとに課題やテストが複数存在するため，
+「どの授業で，いつまでに，どの課題やテストがあるか」を一覧で把握できるようにすることを目的とする．
+本アプリケーションでは，授業名，課題名，種別，締切日，状態をまとめて管理し，
+締切が近い課題を見落とさないようにする．
+
+\subsubsection*{画面構成と画面遷移}
+
+主な画面は次の 4 つである．
+
+\begin{itemize}
+  \item 一覧画面：登録済みの課題・テストを表形式で一覧表示する．
+  \item 詳細画面：1 件の課題・テストの内容を表示する．
+  \item 新規登録画面：新しい課題・テストを追加するフォームを表示する．
+  \item 編集画面：既存の課題・テストの内容を変更するフォームを表示する．
+\end{itemize}
+
+画面遷移の概要を図\ref{fig:tasks-transition}に示す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{fig/tasks_transition.png}
+  \caption{授業課題・テスト管理アプリの画面遷移図}
+  \label{fig:tasks-transition}
+\end{figure}
+
+\subsubsection*{主な操作}
+
+利用者は次のような操作を行う．
+
+\begin{itemize}
+  \item 一覧画面で，登録済みの課題・テストを確認する．
+  \item 一覧画面から新規登録画面に移動し，新しい課題・テストを登録する．
+  \item 詳細画面から編集画面に移動し，状態や締切日などを更新する．
+  \item 詳細画面の削除ボタンで，不要になった課題・テストを削除する．
+\end{itemize}
+
+\subsection{サブスク管理アプリ（subs\_app）}
+
+\subsubsection*{目的}
+
+動画配信サービスや音楽配信サービスなどのサブスクリプションが増えると，
+どのサービスにいくら支払っているのか把握しづらくなる．
+本アプリケーションは，契約中のサブスクを一覧管理し，
+サービス名，カテゴリ，料金，課金サイクルなどを整理して確認できるようにすることを目的とする．
+
+\subsubsection*{画面構成と画面遷移}
+
+主な画面は次の 4 つである．
+
+\begin{itemize}
+  \item 一覧画面：登録済みサブスクを表形式で表示する．
+  \item 詳細画面：1 件のサブスクについて，料金や課金サイクルなどを表示する．
+  \item 新規登録画面：新しいサブスクを登録するフォームを表示する．
+  \item 編集画面：既存のサブスク情報を変更するフォームを表示する．
+\end{itemize}
+
+画面遷移の概要を図\ref{fig:subs-transition}に示す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{fig/subs_transition.png}
+  \caption{サブスク管理アプリの画面遷移図}
+  \label{fig:subs-transition}
+\end{figure}
+
+\subsubsection*{主な操作}
+
+\begin{itemize}
+  \item 一覧画面で，契約しているサブスク一覧と月額料金を確認する．
+  \item 新規登録画面で，新たに契約したサブスクを登録する．
+  \item 詳細画面から編集画面に移動し，料金変更やメモの追記を行う．
+  \item 解約したサブスクを削除し，一覧を整理する．
+\end{itemize}
+
+\subsection{ToDo リストアプリ（todos\_app）}
+
+\subsubsection*{目的}
+
+日々の作業ややるべきことを簡単に整理できる ToDo リストを提供する．
+タスクのタイトル，優先度，完了状況などを一覧で管理し，
+重要なタスクを見落とさないようにすることを目的とする．
+
+\subsubsection*{画面構成と画面遷移}
+
+主な画面は次の 4 つである．
+
+\begin{itemize}
+  \item 一覧画面：登録済みの ToDo を表形式で表示する．
+  \item 詳細画面：1 件の ToDo について，優先度や完了状態などを表示する．
+  \item 新規登録画面：新しい ToDo を登録するフォームを表示する．
+  \item 編集画面：既存の ToDo の内容を変更するフォームを表示する．
+\end{itemize}
+
+画面遷移の概要を図\ref{fig:todos-transition}に示す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{fig/todos_transition.png}
+  \caption{ToDo リストアプリの画面遷移図}
+  \label{fig:todos-transition}
+\end{figure}
+
+\subsubsection*{主な操作}
+
+\begin{itemize}
+  \item 一覧画面で，登録済み ToDo の一覧を確認する．
+  \item 新規登録画面で，新しい ToDo を登録する．
+  \item 詳細画面から編集画面に移動し，優先度や完了状態を更新する．
+  \item 完了済みまたは不要な ToDo を削除する．
+\end{itemize}
+
+\section{管理者向け仕様}
+
+この節では，データ構造や入力ルール，サーバの起動・停止方法など，
+運用・管理の観点から 3 つのアプリケーションを説明する．
+いずれのアプリケーションも，データはサーバプログラム内の配列変数として保持し，
+サーバを再起動すると初期データに戻る．
+
+\subsection{授業課題・テスト管理アプリのデータ仕様}
+
+課題・テストは，表\ref{tab:tasks-data}に示す項目を持つオブジェクトとして \texttt{tasks} 配列で管理する．
+
+\begin{table}[H]
+  \centering
+  \caption{課題・テストのデータ項目}
+  \label{tab:tasks-data}
+  \begin{tabular}{lll}
+    \hline
+    項目名 & 型 & 概要 \\
+    \hline
+    id      & 数値   & 課題・テストの ID \\
+    title   & 文字列 & タイトル \\
+    course  & 文字列 & 科目名 \\
+    type    & 文字列 & 種別（レポートなど） \\
+    dueDate & 文字列 & 締切日（YYYY-MM-DD） \\
+    status  & 文字列 & 状態（未提出など） \\
+    memo    & 文字列 & メモ \\
+    \hline
+  \end{tabular}
+\end{table}
+
+入力・運用ルールを以下に示す．
+
+\begin{itemize}
+  \item \texttt{title}, \texttt{course}, \texttt{type}, \texttt{dueDate}, \texttt{status} は必須項目とする．
+  \item \texttt{status} は「未提出」「勉強中」「提出済」のいずれかを選択する．
+  \item \texttt{dueDate} は HTML の日付入力欄から \texttt{YYYY-MM-DD} 形式で入力する．
+  \item サーバ再起動時には \texttt{tasks} 配列が初期状態に戻るため，長期保存したい場合は別途バックアップを行う．
+\end{itemize}
+
+\subsection{サブスク管理アプリのデータ仕様}
+
+サブスクリプション情報は，表\ref{tab:subs-data}に示す項目を持つオブジェクトとして \texttt{subscriptions} 配列で管理する．
+
+\begin{table}[H]
+  \centering
+  \caption{サブスクのデータ項目}
+  \label{tab:subs-data}
+  \begin{tabular}{lll}
+    \hline
+    項目名 & 型 & 概要 \\
+    \hline
+    id       & 数値   & サブスクの ID \\
+    name     & 文字列 & サービス名 \\
+    category & 文字列 & カテゴリ（動画配信など） \\
+    fee      & 数値   & 月額料金（円） \\
+    cycle    & 文字列 & 課金サイクル \\
+    memo     & 文字列 & 備考 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+運用ルールは次のとおりである．
+
+\begin{itemize}
+  \item \texttt{name}, \texttt{category}, \texttt{fee}, \texttt{cycle} は必須項目とする．
+  \item \texttt{fee} は 0 以上の整数とし，フォームでは数値入力欄を用いる．
+  \item 解約したサブスクは削除処理で一覧から除去する．
+\end{itemize}
+
+\subsection{ToDo リストアプリのデータ仕様}
+
+ToDo データは，表\ref{tab:todos-data}に示す項目を持つオブジェクトとして \texttt{todos} 配列で管理する．
+
+\begin{table}[H]
+  \centering
+  \caption{ToDo のデータ項目}
+  \label{tab:todos-data}
+  \begin{tabular}{lll}
+    \hline
+    項目名 & 型 & 概要 \\
+    \hline
+    id       & 数値   & ToDo の ID \\
+    title    & 文字列 & タイトル \\
+    priority & 文字列 & 優先度（高・中・低） \\
+    done     & 真偽値 & 完了フラグ \\
+    memo     & 文字列 & メモ \\
+    \hline
+  \end{tabular}
+\end{table}
+
+運用ルールは次のとおりである．
+
+\begin{itemize}
+  \item \texttt{title} は必須項目とし，空のまま登録しない．
+  \item \texttt{priority} は「高」「中」「低」から選択させる．
+  \item \texttt{done} はチェックボックスの ON/OFF を真偽値として保持する．
+\end{itemize}
+
+\subsection{サーバの起動・停止手順}
+
+管理者がサーバを運用する際の共通手順を以下に示す．
+
+\subsubsection*{前提条件}
+
+\begin{itemize}
+  \item Node.js がインストールされていること．
+  \item 上記 GitHub リポジトリをクローン済みであること．
+\end{itemize}
+
+\subsubsection*{授業課題・テスト管理アプリ（tasks\_app）の起動・停止}
+
+\begin{enumerate}
+  \item ターミナルで \texttt{wpro2025/tasks\_app} ディレクトリに移動する．
+  \item 初回のみ \texttt{npm install} を実行して依存パッケージをインストールする．
+  \item \texttt{npm start} または \texttt{node app.js} を実行し，ポート 8080 でサーバを起動する．
+  \item ブラウザから \url{http://localhost:8080/} にアクセスし，一覧画面を表示する．
+  \item 停止するときは，ターミナルで \texttt{Ctrl+C} を押してサーバを終了する．
+\end{enumerate}
+
+\subsubsection*{サブスク管理アプリ（subs\_app）の起動・停止}
+
+\begin{enumerate}
+  \item ターミナルで \texttt{wpro2025/subs\_app} ディレクトリに移動する．
+  \item 初回のみ \texttt{npm install} を実行して依存パッケージをインストールする．
+  \item \texttt{npm start} または \texttt{node app.js} を実行し，ポート 8080 でサーバを起動する．
+  \item ブラウザから \url{http://localhost:8080/} にアクセスし，一覧画面を表示する．
+  \item 停止するときは，ターミナルで \texttt{Ctrl+C} を押してサーバを終了する．
+\end{enumerate}
+
+\subsubsection*{ToDo リストアプリ（todos\_app）の起動・停止}
+
+\begin{enumerate}
+  \item ターミナルで \texttt{wpro2025/todos\_app} ディレクトリに移動する．
+  \item 初回のみ \texttt{npm install} を実行して依存パッケージをインストールする．
+  \item \texttt{npm start} または \texttt{node app.js} を実行し，ポート 8080 でサーバを起動する．
+  \item ブラウザから \url{http://localhost:8080/} にアクセスし，一覧画面を表示する．
+  \item 停止するときは，ターミナルで \texttt{Ctrl+C} を押してサーバを終了する．
+\end{enumerate}
+
+複数のアプリケーションを同時に利用する場合は，
+ポート番号が競合しないように，一度サーバを停止してから別のアプリケーションを起動することとする．
+
+\section{開発者向け仕様}
+
+この節では，実装者向けにプログラム構造と処理内容を説明する．
+3 つのアプリケーションはいずれも共通の構成を持ち，
+\texttt{app.js} をエントリポイントとして \texttt{views} ディレクトリ内の EJS テンプレートを描画する．
+
+\subsection{共通の実装構成}
+
+各アプリケーションの \texttt{package.json} では，
+メインファイルを \texttt{app.js} とし，依存モジュールとして \texttt{express} と \texttt{ejs} を利用している．
+\texttt{app.js} 冒頭の構成は共通であり，下記のように設定している．
+
+\begin{itemize}
+  \item \texttt{const express = require('express');} で Express を読み込む．
+  \item \texttt{app.set('view engine', 'ejs');} によりテンプレートエンジンを EJS に設定する．
+  \item \texttt{app.use("/public", express.static(\_\_dirname + "/public"));} で静的ファイルを配信する．
+  \item \texttt{app.use(express.urlencoded(\{ extended: true \}));} で HTML フォームの POST データを解釈できるようにする．
+  \item 各 \texttt{app.js} の先頭に \texttt{"use strict";} を記述し，厳格モードで実行する．
+\end{itemize}
+
+テンプレートは \texttt{views} ディレクトリ内に \texttt{list.ejs}，\texttt{detail.ejs}，\texttt{form.ejs} を配置し，
+CSS ファイルは \texttt{public/style.css} にまとめた．
+
+\subsection{授業課題・テスト管理アプリ（tasks\_app）のプログラム構造}
+
+\subsubsection*{データ定義と検索関数}
+
+\texttt{app.js} では，初期データを持つ \texttt{tasks} 配列を定義している．
+各要素は表\ref{tab:tasks-data}で示した項目を持つオブジェクトであり，
+サンプルとして Web プログラミングのレポートや線形代数の小テストなどを登録している．
+
+個々の課題を取得するため，次のような関数を定義する．
+
+\begin{quote}
+\texttt{function findTaskById(id) \{ return tasks.find(t => t.id === id); \}}
+\end{quote}
+
+\subsubsection*{ルーティングと処理内容}
+
+ルーティングは以下のように実装している．
+
+\begin{itemize}
+  \item \texttt{GET /}：\texttt{list.ejs} を用いて課題一覧を表示する．
+  \item \texttt{GET /tasks/:id}：\texttt{findTaskById} で該当課題を取得し，\texttt{detail.ejs} に渡して表示する．見つからない場合は 404 を返す．
+  \item \texttt{GET /create}：\texttt{form.ejs} に空の課題データと \texttt{/create} を渡し，新規登録フォームを表示する．
+  \item \texttt{POST /create}：フォーム送信値から新しい課題オブジェクトを作成し，\texttt{tasks} 配列の末尾に追加する．ID は最後の要素の ID に 1 を足して採番する．
+  \item \texttt{GET /edit/:id}：編集対象の課題を取得し，\texttt{form.ejs} に渡して編集フォームを表示する．
+  \item \texttt{POST /edit/:id}：フォーム送信値で既存の課題の各項目を上書きする．
+  \item \texttt{POST /delete/:id}：\texttt{tasks} 配列から該当 ID の要素を除外し，一覧画面へリダイレクトする．
+\end{itemize}
+
+\subsection{サブスク管理アプリ（subs\_app）のプログラム構造}
+
+\subsubsection*{データ定義と検索関数}
+
+\texttt{subs\_app/app.js} では，サブスク情報を持つ \texttt{subscriptions} 配列を定義している．
+各要素は表\ref{tab:subs-data}で示した項目を持ち，Netflix や Spotify などのサンプルデータを登録している．
+
+個々のサブスクを取得するため，次の関数を定義する．
+
+\begin{quote}
+\texttt{function findSubById(id) \{ return subscriptions.find(s => s.id === id); \}}
+\end{quote}
+
+\subsubsection*{ルーティングと処理内容}
+
+主なルート定義は次のとおりである．
+
+\begin{itemize}
+  \item \texttt{GET /}：\texttt{list.ejs} を用いてサブスク一覧を表示する．
+  \item \texttt{GET /subs/:id}：\texttt{findSubById} で該当サブスクを取得し，\texttt{detail.ejs} に渡して表示する．
+  \item \texttt{GET /create}：新規登録フォームを \texttt{form.ejs} で表示する．
+  \item \texttt{POST /create}：フォーム送信値から新しいサブスクを生成し，\texttt{subscriptions} 配列に追加する．料金は \texttt{Number} で数値化する．
+  \item \texttt{GET /edit/:id}：編集対象を取得し，\texttt{form.ejs} に渡して表示する．
+  \item \texttt{POST /edit/:id}：フォーム送信値で既存のサブスクを更新する．
+  \item \texttt{POST /delete/:id}：\texttt{subscriptions} 配列から該当サブスクを削除する．
+\end{itemize}
+
+\subsection{ToDo リストアプリ（todos\_app）のプログラム構造}
+
+\subsubsection*{データ定義と検索関数}
+
+\texttt{todos\_app/app.js} では，ToDo 情報を持つ \texttt{todos} 配列を定義している．
+各要素は表\ref{tab:todos-data}の項目を持ち，レポートの要件整理や部屋の片付けなどのサンプルデータを登録している．
+
+個々の ToDo を取得するため，次の関数を定義する．
+
+\begin{quote}
+\texttt{function findTodoById(id) \{ return todos.find(t => t.id === id); \}}
+\end{quote}
+
+\subsubsection*{ルーティングと処理内容}
+
+主なルート定義は次のとおりである．
+
+\begin{itemize}
+  \item \texttt{GET /}：\texttt{list.ejs} を用いて ToDo 一覧を表示する．
+  \item \texttt{GET /todos/:id}：\texttt{findTodoById} で該当 ToDo を取得し，\texttt{detail.ejs} に渡して表示する．
+  \item \texttt{GET /create}：新規登録フォームを \texttt{form.ejs} で表示する．
+  \item \texttt{POST /create}：フォーム送信値から新しい ToDo を生成し，\texttt{todos} 配列に追加する．優先度の未指定時は「中」，完了フラグはチェックボックスの ON/OFF から真偽値を設定する．
+  \item \texttt{GET /edit/:id}：編集対象を取得し，\texttt{form.ejs} に渡して表示する．
+  \item \texttt{POST /edit/:id}：フォーム送信値で既存の ToDo を更新する．
+  \item \texttt{POST /delete/:id}：\texttt{todos} 配列から該当 ToDo を削除する．
+\end{itemize}
+
+\subsection{エラー処理とサーバ起動}
+
+各アプリケーションの末尾では，存在しないパスに対して 404 を返すためのミドルウェアを定義している．
+
+\begin{itemize}
+  \item \texttt{app.use((req, res, next) => \{ res.status(404).send("ページが見つかりません"); \});}
+\end{itemize}
+
+さらに，\texttt{app.listen(8080, () => \{ ... \});} でポート 8080 番を待ち受けるサーバを起動し，
+コンソールに起動メッセージを出力するようにしている．
+
+\end{document}

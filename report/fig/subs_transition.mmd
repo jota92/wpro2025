@@ -1,0 +1,16 @@
+stateDiagram-v2
+[*] --> entry:一覧画面
+entry : /
+
+entry --> subCreate:新規登録フォーム
+entry --> subDetail:詳細表示
+
+subCreate : /create
+subDetail : /subs/id
+subEdit   : /edit/id
+
+entry     --> subDetail:詳細リンク
+subDetail --> entry:一覧へ戻る
+subDetail --> subEdit:編集フォーム
+subEdit   --> subDetail:更新後の詳細
+subEdit   --> entry:一覧へ戻る
